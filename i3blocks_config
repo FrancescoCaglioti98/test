@@ -1,0 +1,25 @@
+# i3blocks configuration
+
+separator_block_width=15
+markup=pango
+
+[volume]
+command=echo "🔊 $(pamixer --get-volume)%"
+interval=1
+signal=10
+
+[memory]
+command=echo "💾 $(free -h | awk '/^Mem:/ {print $3 "/" $2}')"
+interval=5
+
+[cpu]
+command=echo "⚡ $(top -bn1 | grep "Cpu(s)" | awk '{print $2}' | cut -d'%' -f1)%"
+interval=2
+
+[battery]
+command=echo "🔋 $(cat /sys/class/power_supply/BAT0/capacity 2>/dev/null || echo 'AC')%"
+interval=30
+
+[time]
+command=echo "📅 $(date '+%Y-%m-%d %H:%M')"
+interval=1
