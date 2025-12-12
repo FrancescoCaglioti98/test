@@ -4,7 +4,7 @@ separator_block_width=15
 markup=pango
 
 [volume]
-command=echo "🔊 $(pamixer --get-volume)%"
+command=if pactl get-sink-mute @DEFAULT_SINK@ | grep -q 'yes'; then echo "🔇 MUTE"; else echo "🔊 $(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po '\d+(?=%)' | head -1)%"; fi
 interval=1
 signal=10
 
